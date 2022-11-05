@@ -100,3 +100,76 @@ P_{9}(x) &= \frac{315}{128} x - \frac{1155}{32} x^{3} + \frac{9009}{64} x^{5} - 
 &\vdots
 \end{align}
 ```
+
+`Rational(Float32(x))` replaces `roughlyRational(x)` but has an error:
+
+```julia
+# using SpecialPolynomials
+# using Polynomials
+# using Latexify
+# using LaTeXStrings
+for n in 4:4
+    for k in 0:1
+        # derivative of the Laguerre polynomials
+        p = basis(Laguerre{0}, n)
+        p = convert(Polynomial, p)
+        p = derivative(p,k)
+        p = Rational.(Float32.(p.coeffs))
+        p = SimplePolynomial(p...)
+        latexstring("L_n^k(x) = ", latexify("p", env=:raw, cdot=false)) |> display
+        # Conversion from generalized Laguerre polynomials
+        p = basis(Laguerre{k}, n-k)
+        p = convert(Polynomial, p) * (-1)^k
+        p = Rational.(Float32.(p.coeffs))
+        p = SimplePolynomial(p...)
+        latexstring("L_n^k(x) = ", latexify("p", env=:raw, cdot=false)) |> display
+    end
+end
+```
+
+```math
+\begin{align}
+L_4^0(x) &= \frac{1}{1} - \frac{4}{1} x + \frac{3}{1} x^{2} - \frac{11184811}{16777216} x^{3} + \frac{11184811}{268435456} x^{4} \\
+L_4^0(x) &= \frac{1}{1} - \frac{4}{1} x + \frac{3}{1} x^{2} - \frac{11184811}{16777216} x^{3} + \frac{11184811}{268435456} x^{4} \\
+L_4^1(x) &= \frac{-4}{1} + \frac{6}{1} x - \frac{2}{1} x^{2} + \frac{11184811}{67108864} x^{3} \\
+L_4^1(x) &= \frac{-4}{1} + \frac{6}{1} x - \frac{2}{1} x^{2} + \frac{11184811}{67108864} x^{3} \\
+&\vdots
+\end{align}
+```
+
+`roughlyRational(x)` solves this problem.
+
+```julia
+# using SpecialPolynomials
+# using Polynomials
+# using Latexify
+# using LaTeXStrings
+for n in 4:4
+    for k in 0:1
+        # derivative of the Laguerre polynomials
+        p = basis(Laguerre{0}, n)
+        p = convert(Polynomial, p)
+        p = derivative(p,k)
+        p = roughlyRational.(p.coeffs)
+        p = SimplePolynomial(p...)
+        latexstring("L_n^k(x) = ", latexify("p", env=:raw, cdot=false)) |> display
+        # Conversion from generalized Laguerre polynomials
+        p = basis(Laguerre{k}, n-k)
+        p = convert(Polynomial, p) * (-1)^k
+        p = roughlyRational.(p.coeffs)
+        p = SimplePolynomial(p...)
+        latexstring("L_n^k(x) = ", latexify("p", env=:raw, cdot=false)) |> display
+    end
+end
+```
+
+
+```math
+\begin{align}
+L_4^0(x) &= \frac{1}{1} - \frac{4}{1} x + \frac{3}{1} x^{2} - \frac{2}{3} x^{3} + \frac{1}{24} x^{4} \\
+L_4^0(x) &= \frac{1}{1} - \frac{4}{1} x + \frac{3}{1} x^{2} - \frac{2}{3} x^{3} + \frac{1}{24} x^{4} \\
+L_4^1(x) &= \frac{-4}{1} + \frac{6}{1} x - \frac{2}{1} x^{2} + \frac{1}{6} x^{3} \\
+L_4^1(x) &= \frac{-4}{1} + \frac{6}{1} x - \frac{2}{1} x^{2} + \frac{1}{6} x^{3} \\
+&\vdots
+\end{align}
+```
