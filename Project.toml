@@ -1,0 +1,13 @@
+name = "RoughlyRational"
+uuid = "580b7df8-d96c-4540-a4b5-5a71b7a57350"
+authors = ["Shuhei Ohno <ohno.github@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
