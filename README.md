@@ -41,8 +41,10 @@ using RoughlyRational
 ```julia
 julia> x = sin(2π)
 -2.4492935982947064e-16
+
 julia> isinteger(x)
 false
+
 julia> maybeinteger(x)
 true
 ```
@@ -52,6 +54,7 @@ true
 ```julia
 julia> Rational(0.499999)
 9007181240342483//18014398509481984
+
 julia> roughlyRational(0.499999)
 1//2
 ```
@@ -81,6 +84,7 @@ for n in 0:15
     latexstring("P_{$n}(x) = ", latexify("$s", env=:raw, cdot=false)) |> display
 end
 ```
+
 ```math
 \begin{align}
 P_{0}(x) &= 1 \\
