@@ -34,7 +34,7 @@ using RoughlyRational
 `maybeinteger(x)` and `RoughlyRational(x)` are available.
 
 
-### Examples
+## Examples
 
 `maybeinteger(x)` can determine whether `x` is an integer or not, more roughly than `isinteger(x)`:
 
