@@ -19,7 +19,7 @@ true
 maybeinteger(x; ε=1e-12) = abs(x - round(x)) < ε
 
 """
-    roughlyRational(x; i_max=100000, ε=1e-12) -> Bool
+    roughlyRational(x; i_max=100000, ε=1e-12) -> Rational
 
 Rough [`Rational(x)`](https://github.com/JuliaLang/julia/blob/36034abf26062acad4af9dcec7c4fc53b260dbb4/base/rational.jl#L9).
 ```jldoctest
