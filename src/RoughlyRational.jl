@@ -10,8 +10,10 @@ export
 Test whether `x` is numerically **roughly** equal to some integer like [`isinteger(x)`](https://github.com/JuliaLang/julia/blob/36034abf26062acad4af9dcec7c4fc53b260dbb4/base/number.jl#L20).
 ```jldoctest
 julia> x = sin(2π)
+
 julia> isinteger(x)
 false
+
 julia> maybeinteger(x)
 true
 ```
@@ -25,6 +27,7 @@ Rough [`Rational(x)`](https://github.com/JuliaLang/julia/blob/36034abf26062acad4
 ```jldoctest
 julia> Rational(0.499999)
 9007181240342483//18014398509481984
+
 julia> roughlyRational(0.499999)
 1//2
 ```

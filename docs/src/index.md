@@ -33,29 +33,25 @@ add https://github.com/ohno/RoughlyRational.jl
 
 To use this package, run the following code in your Jupyter Notebook or code:
 
-```julia
+```@setup usage
 using RoughlyRational
 ```
 
 `maybeinteger(x)` and `RoughlyRational(x)` are available. `maybeinteger(x)` can determine whether `x` is an integer or not, more roughly than `isinteger(x)`:
 
-```julia
-julia> x = sin(2π)
--2.4492935982947064e-16
-
-julia> isinteger(x)
-false
-
-julia> maybeinteger(x)
-true
+```@repl usage
+x = sin(2π)
+isinteger(x)
+maybeinteger(x)
 ```
 
 `roughlyRational` can convert `x` to a rational number more roughly than `Rational(x)`:
 
-```julia
-julia> Rational(0.499999)
-9007181240342483//18014398509481984
+```@repl usage
+Rational(0.499999)
+roughlyRational(0.499999)
+```
 
-julia> roughlyRational(0.499999)
-1//2
+```@docs
+roughlyRational
 ```
